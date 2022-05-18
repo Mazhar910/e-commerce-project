@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card shadow-lg card-body">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" style="width: 100% !important;"
+                   class="table-striped table-hover table-bordered">
+                <thead class="bg-base-color text-white text-center">
+                <tr>
+                    <th> Name</th>
+                    <th> Code</th>
+                    <th> Scale</th>
+                    <th> Vendor</th>
+                    <th> Description</th>
+                    <th>Qty In Stock</th>
+                    <th>Buy Price</th>
+                    <th>MSRP</th>
+                    <th>Image</th>
+                    <th style="min-width: 70px">Action</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="products?.length != 0">
+                <tr *ngFor="let prod of products" class="text-center">
+                    <td>{{ prod.productName }}</td>
+                    <td>{{ prod.productCode }}</td>
+                    <td>{{ prod.productScale }}</td>
+                    <td>{{ prod.productVendor }}</td>
+                    <td>{{ prod.productDescription }}</td>
+                    <td>{{ prod.quantityInStock }}</td>
+                    <td>{{ prod.buyPrice }}</td>
+                    <td>{{ prod.sellingPrice }}</td>
+                    <td><img src="{{'data:image/jpg;base64,' + prod.image}}" style="max-width: 50px"></td>
+                    <td>
+                        <span style="margin-right: 10px;cursor: pointer" class="text-primary"
+                              (click)="gotoUpdate(prod.id)">
+                            <i class="fa fa-edit"> </i>
+                        </span>
+
+                        <span class="text-danger" (click)="deleteData(prod.id)" style="cursor: pointer">
+                            <i class="fa fa-trash-alt"> </i>
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

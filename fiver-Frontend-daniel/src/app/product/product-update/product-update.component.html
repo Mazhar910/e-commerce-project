@@ -1,0 +1,102 @@
+<ngx-spinner fullScreen="false">
+    <p style="font-size: 20px; color: white">Processing...</p>
+</ngx-spinner>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card shadow-lg card-body">
+            <div class="col-sm-12 p-0 mb-3"><h3>Create Product</h3></div>
+
+            <form [formGroup]="createData" (ngSubmit)="create(product_image, outlet_id.value)">
+                <div class="form-horizontal row">
+                    <div class="col-sm-6 mb-3">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" formControlName="productName" [(ngModel)]="products.productName" class="form-control form-control-md mb-3"
+                                   name="productName" placeholder="Product name">
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Purchased Price</label>
+                            <input type="text" formControlName="buyPrice" [(ngModel)]="products.buyPrice"
+                                   class="form-control form-control-md mb-3"
+                                   name="buyPrice" placeholder="Purchased Price">
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Product Detail</label>
+                            <input type="text" formControlName="productDescription" [(ngModel)]="products.productDescription"
+                                   class="form-control form-control-md mb-3"
+                                   name="productDescription" placeholder="Product Detail">
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stock Quantity</label>
+                            <input type="text" formControlName="quantityInStock" [(ngModel)]="products.quantityInStock"
+                                   class="form-control form-control-md mb-3"
+                                   name="quantityInStock" placeholder="Stock Quantity(In)">
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Product Image</label>
+                            <input type="file" class="form-control mb-3" #product_image required="required">
+                            <bfv-messages></bfv-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <div class="form-group">
+                            <label>Product Code</label>
+                            <input type="text" formControlName="productCode" [(ngModel)]="products.productCode"
+                                   class="form-control form-control-md mb-3"
+                                   name="productCode" placeholder="Product Code">
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Selling Price</label>
+                            <input type="text" formControlName="sellingPrice" [(ngModel)]="products.sellingPrice"
+                                   class="form-control form-control-md mb-3"
+                                   name="sellingPrice" placeholder="sellingPrice">
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Product Scale</label>
+                            <input type="text" formControlName="productScale" [(ngModel)]="products.productScale"
+                                   class="form-control form-control-md mb-3"
+                                   name="productScale" placeholder="Selling Price">
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Product Line</label>
+                            <select class="form-control" #outlet_id>
+                                <option *ngFor="let outlet of outlets" value="{{outlet.id}}">{{outlet.name}}</option>
+                            </select>
+                            <bfv-messages></bfv-messages>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Vendor Details</label>
+                            <textarea formControlName="productVendor" [(ngModel)]="products.productVendor" class="form-control form-control-md mb-3"
+                                      name="productVendor"></textarea>
+                            <bfv-messages></bfv-messages>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-3">
+                        <button class="btn bg-base-color2 btn-rounded text-white" type="submit">
+                            <strong>Create Product</strong>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
