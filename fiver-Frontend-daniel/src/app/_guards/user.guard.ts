@@ -10,7 +10,7 @@ export class UserGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-    if (localStorage.getItem('user_roles').includes("ROLE_ADMIN") || localStorage.getItem('user_roles').includes("ROLE_SUPER_ADMIN")) {
+    if (localStorage.getItem('user_roles').includes("admin") || localStorage.getItem('user_roles').includes("ROLE_SUPER_ADMIN")) {
       return true;
     }
     this.router.navigate(['/authentication/login'], {queryParams: {returnUrl: state.url}});

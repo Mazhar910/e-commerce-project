@@ -19,6 +19,9 @@ public class CustomerController {
     @Autowired
     ProductlinesRepository productlinesRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @GetMapping("/product/get/all")
     public ResponseEntity<?> getAllProduct() {
         return ResponseEntity.ok(productRepository.findAll());
@@ -26,7 +29,7 @@ public class CustomerController {
 
     @GetMapping("/category/get/all")
     public ResponseEntity<?> getAllCategory() {
-        return ResponseEntity.ok(productlinesRepository.findAll());
+        return ResponseEntity.ok(categoryRepository.findAll());
     }
 
     @GetMapping("/get-by-cat/{catID}")

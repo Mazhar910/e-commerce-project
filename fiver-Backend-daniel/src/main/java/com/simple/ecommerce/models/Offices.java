@@ -1,7 +1,7 @@
 package com.simple.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "offices")
 public class Offices {
-    @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     @Column(name = "officeCode")
     private String officeCode;
 
@@ -39,8 +39,10 @@ public class Offices {
     @Column(name = "territory")
     private String territory;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "officeCode")
+    //    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "officeCode")
+    @JsonIgnoreProperties({"officeCode"})
+    @OneToMany(mappedBy = "officeCode", cascade = CascadeType.ALL)
     private List<Employees> employees;
 
     public Offices() {

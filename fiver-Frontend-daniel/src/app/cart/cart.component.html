@@ -17,8 +17,8 @@
                 <tbody *ngIf="cartItems?.length != 0">
                 <tr *ngFor="let cart of cartItems" class="text-center">
                     <td>{{ cart.id }}</td>
-                    <td>{{ cart.product.name }}</td>
-                    <td>{{ cart.product.price }}</td>
+                    <td>{{ cart.product.productName }}</td>
+                    <td>{{ cart.product.sellingPrice }}</td>
                     <td>{{ cart.qty }}</td>
                     <td><span (click)="deleteCartItem(cart.product.id)" style="cursor: pointer" class="text-danger"><i class="fa fa-trash-alt"></i></span></td>
                 </tr>

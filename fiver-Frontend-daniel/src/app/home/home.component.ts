@@ -1,13 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {DataTableDirective} from 'angular-datatables';
-import {Subject} from 'rxjs';
-import {ApiManagerService} from '../product/api-manager.service';
-import {LoggerService} from '../shared/logger.service';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {HttpClient} from '@angular/common/http';
-import {EndPoints} from '../shared/EndPoints';
-import {AlertService} from '../dashboards/_alert';
-import {Router} from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { ApiManagerService } from '../product/api-manager.service';
+import { LoggerService } from '../shared/logger.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { HttpClient } from '@angular/common/http';
+import { EndPoints } from '../shared/EndPoints';
+import { AlertService } from '../dashboards/_alert';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -50,9 +50,9 @@ export class HomeComponent implements OnInit {
     getAllProduct() {
         this.spinner.show();
         this.apiService.getAll().subscribe((response: any) => {
-                console.log(response);
-                this.products = response;
-            },
+            console.log(response);
+            this.products = response;
+        },
             error => {
                 this.spinner.hide();
                 this.loggerService.log('error', error);
@@ -64,9 +64,9 @@ export class HomeComponent implements OnInit {
     getAllProductByCat(id) {
         this.spinner.show();
         this.apiService.getProductByCat(id).subscribe((response: any) => {
-                console.log(response);
-                this.products = response;
-            },
+            console.log(response);
+            this.products = response;
+        },
             error => {
                 this.spinner.hide();
                 this.loggerService.log('error', error);
@@ -78,9 +78,9 @@ export class HomeComponent implements OnInit {
     getAllCategories() {
         this.spinner.show();
         this.apiService.getCategoriesAll().subscribe((response: any) => {
-                console.log(response);
-                this.categories = response;
-            },
+            console.log("categories: ", response);
+            this.categories = response;
+        },
             error => {
                 this.spinner.hide();
                 this.loggerService.log('error', error);
@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
 
     addToCart(id: any, qty: any) {
         if (qty <= 0) {
-            this.alertService.error('Qty Cannot be empty', {autoClose: true});
+            this.alertService.error('Qty Cannot be empty', { autoClose: true });
             return;
         }
 
@@ -102,13 +102,13 @@ export class HomeComponent implements OnInit {
         };
         this.spinner.show();
         this.apiService.addToCart(data).subscribe((response: any) => {
-                console.log(response);
-                this.alertService.success(response.message, {autoClose: true});
-            },
+            console.log(response);
+            this.alertService.success(response.message, { autoClose: true });
+        },
             error => {
                 this.spinner.hide();
                 this.loggerService.log('error', error);
-                this.alertService.success(error.error.message, {autoClose: true});
+                this.alertService.success(error.error.message, { autoClose: true });
                 this.router.navigate(['/authentication/login']);
             }
         );

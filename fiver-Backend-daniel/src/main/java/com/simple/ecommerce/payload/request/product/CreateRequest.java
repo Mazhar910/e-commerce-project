@@ -10,6 +10,8 @@ public class CreateRequest {
 
     private Long productLines;
 
+    private Long category;
+
     private String productScale;
 
     private String productVendor;

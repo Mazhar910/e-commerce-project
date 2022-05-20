@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
                     localStorage.setItem('user_username', response.username);
                     localStorage.setItem('user_roles', response.roles);
 
-                    if (localStorage.getItem('user_roles').includes('ROLE_ADMIN')) {
+                    if (localStorage.getItem('user_roles').includes('admin')) {
                         console.log(localStorage.getItem('user_roles'));
                         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/manage-order';
                     } else {

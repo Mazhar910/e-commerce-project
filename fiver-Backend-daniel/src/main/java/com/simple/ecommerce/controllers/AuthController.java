@@ -28,7 +28,7 @@ import com.simple.ecommerce.payload.response.MessageResponse;
 import com.simple.ecommerce.security.jwt.JwtUtils;
 import com.simple.ecommerce.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -69,6 +69,7 @@ public class AuthController {
         ));
     }
 
+//    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -89,20 +90,20 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
+            Role userRole = roleRepository.findByName(ERole.customer)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                        Role modRole = roleRepository.findByName(ERole.admin)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
 
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
+                        Role userRole = roleRepository.findByName(ERole.customer)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }

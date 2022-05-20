@@ -1,16 +1,16 @@
 package com.simple.ecommerce.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.sql.Date;
 
+@Data
 @Entity
 @Table(name = "payments")
 public class Payments {
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "paymentNumber")
 	private Integer paymentNumber;
 	

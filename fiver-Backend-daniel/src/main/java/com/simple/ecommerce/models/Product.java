@@ -1,18 +1,16 @@
 package com.simple.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-@Setter
-@Getter
+@Data
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "productCode")
@@ -44,9 +42,14 @@ public class Product {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
-    @ManyToOne
+    @JsonIgnoreProperties({"product"})
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "productLine")
     private Productlines productlines;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     public Product() {
 

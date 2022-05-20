@@ -1,16 +1,17 @@
-import {HttpClient} from '@angular/common/http';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {AlertService} from '../../dashboards/_alert';
-import {EndPoints} from 'src/app/shared/EndPoints';
-import {LoggerService} from 'src/app/shared/logger.service';
-import {Subject} from 'rxjs';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {InventoryApiService} from '../../inventory/InventoryApi.service';
-import {Router} from '@angular/router';
-import {environment} from '../../../environments/environment';
-import {InventoryDialogService} from '../../inventory/_modal/InventoryDialog.service';
+import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AlertService } from '../../dashboards/_alert';
+import { EndPoints } from 'src/app/shared/EndPoints';
+import { LoggerService } from 'src/app/shared/logger.service';
+import { Subject } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryApiService } from '../../inventory/InventoryApi.service';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { InventoryDialogService } from '../../inventory/_modal/InventoryDialog.service';
+import { ApiManagerService } from '../api-manager.service';
 
 @Component({
     selector: 'app-product-component',
@@ -25,19 +26,23 @@ export class ProductComponentComponent implements OnInit {
     fileName: any;
     base64textString: any;
     outlets: any;
+    categories: any;
 
     constructor(private modalService: NgbModal,
-                private formBuilder: FormBuilder,
-                private spinner: NgxSpinnerService,
-                private apiService: InventoryApiService,
-                private router: Router,
-                private dialogService: InventoryDialogService,
-                private endpoints: EndPoints) {
+        private formBuilder: FormBuilder,
+        private spinner: NgxSpinnerService,
+        private apiService: InventoryApiService,
+        private router: Router,
+        private dialogService: InventoryDialogService,
+        private endpoints: EndPoints,
+        private loggerService: LoggerService,
+        private apiManagerService: ApiManagerService,) {
     }
 
     ngOnInit(): void {
         this.formInitialization();
         this.getAllProductLine();
+        this.getAllCategories();
     }
 
     formInitialization() {
@@ -76,24 +81,25 @@ export class ProductComponentComponent implements OnInit {
         });
     }
 
-    create(product_image, outlet_id) {
+    create(product_image, outlet_id, category_id) {
         this.spinner.show();
         this.onUploadChange(product_image.files[0]);
 
         setTimeout(() => {
             this.createData.addControl('image', new FormControl(this.base64textString));
             this.createData.addControl('productLines', new FormControl(outlet_id));
+            this.createData.addControl('category', new FormControl(category_id));
 
             console.log(this.createData.value);
 
             this.apiService.post(this.createData.value, this.endpoints.createProduct).subscribe((response: any) => {
-                    console.log(response);
-                    this.spinner.hide();
-                    this.dialogService.open(response.message, 'Successful', 'success', environment.info);
+                console.log(response);
+                this.spinner.hide();
+                this.dialogService.open(response.message, 'Successful', 'success', environment.info);
 
-                    this.createData.reset();
-                    this.formInitialization();
-                },
+                this.createData.reset();
+                this.formInitialization();
+            },
                 error => {
                     this.spinner.hide();
                     this.dialogService.open('Something went wrong!', environment.error_message, 'danger', environment.error);
@@ -119,14 +125,29 @@ export class ProductComponentComponent implements OnInit {
     getAllProductLine() {
         this.spinner.show();
         this.apiService.get('', this.endpoints.getAllPL).subscribe((response: any) => {
-                console.log(response);
-                this.outlets = response;
-            },
+            console.log(response);
+            this.outlets = response;
+        },
             error => {
                 this.spinner.hide();
             }
         );
         this.spinner.hide();
     }
+
+    getAllCategories() {
+        this.spinner.show();
+        this.apiManagerService.getCategoriesAll().subscribe((response: any) => {
+            console.log("categories: ", response);
+            this.categories = response;
+        },
+            error => {
+                this.spinner.hide();
+                this.loggerService.log('error', error);
+            }
+        );
+        this.spinner.hide();
+    }
+
 }
 

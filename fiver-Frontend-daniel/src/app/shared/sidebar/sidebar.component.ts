@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit {
 
     // End open close
     ngOnInit() {
-        if (localStorage.getItem('user_roles').includes('ROLE_ADMIN') || localStorage.getItem('user_roles').includes('ROLE_SUPER_ADMIN')) {
+        if (localStorage.getItem('user_roles').includes('admin') || localStorage.getItem('user_roles').includes('ROLE_SUPER_ADMIN')) {
             this.sidebarnavItems = ADMINS_ROUTES.filter(sidebarnavItem => sidebarnavItem);
         } else {
             this.sidebarnavItems = CUSTOMER_ROUTES.filter(sidebarnavItem => sidebarnavItem);

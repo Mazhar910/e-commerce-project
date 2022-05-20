@@ -32,15 +32,20 @@ public class ProductController {
     ProductRepository productRepository;
 
     @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody CreateRequest createRequest) {
         Productlines productlines = productlinesRepository.findById(createRequest.getProductLines()).isPresent() ? productlinesRepository.findById(createRequest.getProductLines()).get() : null;
+        Category category = categoryRepository.findById(createRequest.getCategory()).isPresent() ? categoryRepository.findById(createRequest.getCategory()).get() : null;
 
         try {
             Product products = modelMapper.map(createRequest, Product.class);
             products.setProductlines(productlines);
+            products.setCategory(category);
             productRepository.save(products);
 
             return ResponseEntity.ok(new MessageResponse("Product Created Successfully"));

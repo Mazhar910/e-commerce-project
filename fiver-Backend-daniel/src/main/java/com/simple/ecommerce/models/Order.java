@@ -1,15 +1,15 @@
 package com.simple.ecommerce.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -38,6 +38,7 @@ public class Order {
     @JoinColumn(name = "uid")
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "orders")
     private Set<OrderedProducts> orderedProducts;
 

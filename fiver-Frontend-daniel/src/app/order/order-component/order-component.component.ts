@@ -73,7 +73,7 @@ export class OrderComponentComponent implements OnInit, AfterViewInit {
     loadDatatables() {
         const that = this;
         let url = '';
-        if (localStorage.getItem('user_roles').includes('ROLE_ADMIN') || localStorage.getItem('user_roles').includes('ROLE_SUPER_ADMIN')) {
+        if (localStorage.getItem('user_roles').includes('admin') || localStorage.getItem('user_roles').includes('ROLE_SUPER_ADMIN')) {
             url = this.endpoints.getOrders;
         } else {
             url = this.endpoints.getUserOrder;

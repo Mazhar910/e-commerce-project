@@ -1,16 +1,16 @@
 package com.simple.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
 @Table(name = "employees")
 public class Employees {
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    // @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "employeeNumber")
     private Integer employeeNumber;
 
@@ -22,10 +22,14 @@ public class Employees {
     private String extension;
     @Column(name = "email")
     private String email;
-    @Column(name = "officeCode")
-    private Integer officeCode;
     @Column(name = "reportsTo")
     private Integer reportsTo;
     @Column(name = "jobTitle")
     private String jobTitle;
+
+    //    @Column(name = "officeCode")
+    @JsonIgnoreProperties({"employees"})
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "officeCode")
+    private Offices officeCode;
 }

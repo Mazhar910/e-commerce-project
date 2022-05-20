@@ -1,16 +1,14 @@
 package com.simple.ecommerce.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "productlines")
 public class Productlines {
@@ -25,7 +23,14 @@ public class Productlines {
     @Column(name = "htmlDescription")
     private String htmlDescription;
 
-    @JsonIgnore
+    @Column(name = "productLine")
+    private String productLine;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+
+    @JsonIgnoreProperties({"productlines"})
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @OneToMany(mappedBy = "productlines")
     private List<Product> product;

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {EndPoints} from '../_models/EndPoints';
-import {catchError} from 'rxjs/operators';
-import {throwError} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { EndPoints } from '../_models/EndPoints';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,7 @@ export class ApiManagerService {
   }
 
   public registration(registrationData): any {
+    console.log("registrationData: ", registrationData);
     return this.http.post(this.endpoints.subscriber_registration, registrationData).pipe(
       catchError(this.handleError),
     );
