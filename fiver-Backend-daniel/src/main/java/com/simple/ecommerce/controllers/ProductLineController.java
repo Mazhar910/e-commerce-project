@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/productline")
-public class CategoryController {
+public class ProductLineController {
     @Autowired
     ProductlinesRepository productlinesRepository;
 
