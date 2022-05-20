@@ -1,4 +1,4 @@
-import {RouteInfo} from './sidebar.metadata';
+import { RouteInfo } from './sidebar.metadata';
 
 export const ADMINS_ROUTES: RouteInfo[] = [
     {
@@ -12,6 +12,14 @@ export const ADMINS_ROUTES: RouteInfo[] = [
     {
         path: '/manage-category',
         title: 'Manage Category',
+        icon: 'icon-Files',
+        class: '',
+        extralink: false,
+        submenu: []
+    },
+    {
+        path: '/product-lines',
+        title: 'Product Lines',
         icon: 'icon-Files',
         class: '',
         extralink: false,

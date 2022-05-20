@@ -8,13 +8,19 @@
         <div class="card shadow-lg card-body">
             <div class="form-group row">
                 <div class="col-sm-12"><p>Create Product Line</p></div>
-                <div class="col-sm-6 mb-3">
-                    <input class="form-control" placeholder="Category Name..." #cat_name>
+                <div class="col-sm-3 mb-3">
+                    <input class="form-control" placeholder="Product Line..." #cat_name>
                 </div>
                 <div class="col-sm-3 mb-3">
+                    <input class="form-control" placeholder="Text Des..." #textDescription>
+                </div>
+                <div class="col-sm-3 mb-3">
+                    <input class="form-control" placeholder="HTML Des..." #htmlDescription>
+                </div>
+                <div class="col-sm-2 mb-3">
                     <button class="btn bg-success btn-rounded text-white"
-                            (click)="createCategory(cat_name.value)">
-                        <strong>Add Category</strong>
+                            (click)="createCategory(cat_name.value,textDescription.value, htmlDescription.value )">
+                        <strong>Add Product Line</strong>
                     </button>
                 </div>
             </div>
@@ -35,9 +41,17 @@
                            #cat_name_update>
                     <input class="form-control hidden" value="{{category.id}}" #cat_id_update>
                 </div>
+                <div class="col-sm-3 mb-3">
+                    <input class="form-control" value="{{category.textDescription}}" placeholder="Text Des..."
+                           #textDescriptionUpdate>
+                </div>
+                <div class="col-sm-3 mb-3">
+                    <input class="form-control" value="{{category.htmlDescription}}" placeholder="HTML Des..."
+                           #htmlDescriptionUpdate>
+                </div>
                 <div class="col-sm-2 mb-3">
                     <button class="btn bg-warning btn-rounded text-white"
-                            (click)="updateCategory(cat_name_update.value, cat_id_update.value)">
+                            (click)="updateCategory(cat_name_update.value, cat_id_update.value, textDescriptionUpdate.value, htmlDescriptionUpdate.value )">
                         <strong>Update</strong>
                     </button>
                 </div>
@@ -61,6 +75,8 @@
                 <tr>
                     <th>ID</th>
                     <th> Name</th>
+                    <th>Text</th>
+                    <th>HTML</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -68,6 +84,8 @@
                 <tr *ngFor="let cat of categories" class="text-center">
                     <td>{{ cat.id }}</td>
                     <td>{{ cat.name }}</td>
+                    <td>{{ cat.textDescription }}</td>
+                    <td>{{ cat.htmlDescription }}</td>
                     <td>
                         <span style="margin-right: 10px" class="btn btn-sm btn-primary" (click)="getData(cat.id)">
                             <i class="fa fa-edit"> </i>

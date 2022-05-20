@@ -62,7 +62,7 @@ export class ManageCategoryComponent implements OnInit, AfterViewInit {
             serverSide: true,
             processing: true,
             ajax: (dataTablesParameters: any, callback) => {
-                that.http.post<DataTablesResponse>(this.endpoints.getAllPL,
+                that.http.post<DataTablesResponse>(this.endpoints.getAllCat,
                     dataTablesParameters, {}
                 ).subscribe(resp => {
                     that.categories = resp.data;
@@ -76,19 +76,15 @@ export class ManageCategoryComponent implements OnInit, AfterViewInit {
             searching: false,
             columns: [
                 {data: 'id'},
-                {data: 'name'},
-                {data: 'textDescription'},
-                {data: 'htmlDescription'}
+                {data: 'name'}
             ]
         };
     }
 
-    createCategory(name: string, text, html) {
+    createCategory(name: string) {
         this.spinner.show();
         const data = {
             'name': name,
-            'textDescription': text,
-            'htmlDescription': html
         };
         this.apiService.createCategory(data).subscribe((response: any) => {
                 this.spinner.hide();
@@ -131,11 +127,9 @@ export class ManageCategoryComponent implements OnInit, AfterViewInit {
         console.log(id);
     }
 
-    updateCategory(name: string, id: string, text, html) {
+    updateCategory(name: string, id: string) {
         const data = {
             'name': name,
-            'textDescription': text,
-            'htmlDescription': html
         };
         this.apiService.updateCategory(data, id).subscribe((response: any) => {
                 this.spinner.hide();

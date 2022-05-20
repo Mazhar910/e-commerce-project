@@ -84,6 +84,30 @@ export class ApiManagerService {
             catchError(this.handleError),
         );
     }
+    public createPL(body): any {
+        return this.http.post(this.endpoints.createPL, body).pipe(
+            catchError(this.handleError),
+        );
+    }
+
+    public updatePL(body, id): any {
+        return this.http.put(this.endpoints.updatePL + id, body).pipe(
+            catchError(this.handleError),
+        );
+    }
+
+    public deletePL(id): any {
+        return this.http.delete(this.endpoints.deletePL + id).pipe(
+            catchError(this.handleError),
+        );
+    }
+
+
+    public getPLById(id): any {
+        return this.http.get(this.endpoints.getSpecificPL + id).pipe(
+            catchError(this.handleError),
+        );
+    }
 
 
     private handleError(error: HttpErrorResponse): any {

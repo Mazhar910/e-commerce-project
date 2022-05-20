@@ -62,6 +62,7 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {InventoryDialogService} from './inventory/_modal/InventoryDialog.service';
 import {InventoryApiService} from './inventory/InventoryApi.service';
 import {ProductUpdateComponent} from './product/product-update/product-update.component';
+import { ProductLinesComponent } from './product/product-lines/product-lines.component';
 
 registerLocaleData(localeFr);
 
@@ -81,6 +82,7 @@ registerLocaleData(localeFr);
         HomeComponent,
         ProductListComponent,
         ProductUpdateComponent,
+        ProductLinesComponent,
     ],
     imports: [
         CommonModule,

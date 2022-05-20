@@ -27,7 +27,8 @@
                     <td>{{ prod.quantityInStock }}</td>
                     <td>{{ prod.buyPrice }}</td>
                     <td>{{ prod.sellingPrice }}</td>
-                    <td><img src="{{'data:image/jpg;base64,' + prod.image}}" style="max-width: 50px"></td>
+                    <td *ngIf="prod.image != null"><img src="{{'data:image/jpg;base64,' + prod.image}}" style="max-width: 50px"></td>
+                    <td *ngIf="prod.image == null"><img src="..\assets\images\product\default-store-350x350.jpg" style="max-width: 50px"></td>
                     <td>
                         <span style="margin-right: 10px;cursor: pointer" class="text-primary"
                               (click)="gotoUpdate(prod.id)">

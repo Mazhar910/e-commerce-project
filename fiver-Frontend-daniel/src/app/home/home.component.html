@@ -4,8 +4,7 @@
             <div class="col-sm-6" style="top: 10px;left: 15px">
                 <select class="form-control" #category (change)="getAllProductByCat(category.value)">
                     <option value="0" selected> All</option>
-                    <option *ngFor="let category of categories"
-                            value="{{category.id}}">{{ category.name}}</option>
+                    <option *ngFor="let category of categories" value="{{category.id}}">{{ category.name}}</option>
                 </select>
             </div>
             <div class="col-sm-5 text-right" style="top: 17px;right: 25px">
@@ -25,7 +24,10 @@
                     <div class="card d-flex flex-column align-items-center">
                         <div class="product-name">{{prod.productName}}</div>
                         <div class="card-img">
-                            <img src="{{'data:image/jpg;base64,' + prod.image}}" alt="">
+                            <span *ngIf="prod.image != null">
+                                <img src="{{'data:image/jpg;base64,' + prod.image}}" alt=""></span>
+                                <span *ngIf="prod.image == null">
+                                    <img src="..\assets\images\product\default-store-350x350.jpg" style="object-fit:fill;" alt=""></span>
                         </div>
                         <div class="card-body">
                             <div class="d-flex align-items-center price">

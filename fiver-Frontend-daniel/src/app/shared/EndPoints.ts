@@ -4,14 +4,18 @@ import {OnInit} from '@angular/core';
 export class EndPoints {
     private baseUrl = environment.base_url;
 
-    public readonly createCat = this.baseUrl + 'api/productline/create';
+    public readonly createCat = this.baseUrl + 'api/category/create';
     public readonly getAllCat = this.baseUrl + 'api/category/get/all';
-    public readonly getSpecificCat = this.baseUrl + 'api/productline/get/';
-    public readonly updateCat = this.baseUrl + 'api/productline/update/';
-    public readonly deleteCat = this.baseUrl + 'api/productline/delete/';
+    public readonly getSpecificCat = this.baseUrl + 'api/category/get/';
+    public readonly updateCat = this.baseUrl + 'api/category/update/';
+    public readonly deleteCat = this.baseUrl + 'api/category/delete/';
 
-
+    public readonly createPL = this.baseUrl + 'api/productline/create';
     public readonly getAllPL = this.baseUrl + 'api/productline/get/all';
+    public readonly updatePL = this.baseUrl + 'api/productline/update/';
+    public readonly deletePL = this.baseUrl + 'api/productline/delete/';
+    public readonly getSpecificPL = this.baseUrl + 'api/productline/get/';
+
 
     public readonly createProduct = this.baseUrl + 'api/product/create';
     public readonly getProducts = this.baseUrl + 'api/product/get/all';
